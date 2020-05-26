@@ -1,0 +1,34 @@
+[*]
+[*] GTKWave Analyzer v3.3.105 (w)1999-2020 BSI
+[*] Tue May 26 14:22:58 2020
+[*]
+[dumpfile] "/home/matt/work/fpga/dblclockfft/sw/fft-core/test.vcd"
+[dumpfile_mtime] "Tue May 26 14:22:16 2020"
+[dumpfile_size] 19683289
+[savefile] "/home/matt/work/fpga/dblclockfft/sw/fft-core/fft.gtkw"
+[timestart] 0
+[size] 2210 1111
+[pos] -1 -1
+*-10.000000 969 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] test.
+[treeopen] test.top0.
+[sst_width] 272
+[signals_width] 517
+[sst_expanded] 1
+[sst_vpaned_height] 325
+@28
+test.clk
+@8420
+test.sample_real[11:0]
+@200
+-
+@20000
+-
+@28
+test.top0.fft_0.o_sync
+@8024
+test.top0.abs[25:0]
+@20000
+-
+[pattern_trace] 1
+[pattern_trace] 0
