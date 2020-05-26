@@ -6,29 +6,26 @@ module test;
     
     localparam WIDTH = 12;
     localparam MAX_LEN = 2000;
+    localparam CE = 16;
+    localparam BINS = 8;
 
-    reg [WIDTH-1:0] sample_data [MAX_LEN-1:0];
-    wire signed [WIDTH-1:0] sample_real = sample_data[count];
+    top #(.WIDTH(WIDTH), .BINS(BINS)) top0 (.ext_clk(clk), .reset_async(1'b0), .adc_clk(adc_clk), .adc_cs(adc_cs), .adc_sd(adc_sd));
 
-    top #(.WIDTH(WIDTH)) top0 (.clk(clk), .reset(0), .sample_real(sample_real));
+    wire done, adc_sd, adc_cs, adc_clk;
+    reg run;
+    adc_model #(.MAX_LEN(MAX_LEN), .SAMPLE_FILE("testtone.hex")) adc_model_inst(.run(run), .clk(adc_clk), .cs(adc_cs), .sd(adc_sd), .done(done));
 
-    initial begin
-//        $readmemh("sine.hex", sample_data);
-        $readmemh("sweep.hex", sample_data);
-    end
-
-    reg [15:0] count = 0;
-    always @(posedge clk) begin
-        count <= count + 1;
-        if(count == MAX_LEN)
-            count <= 0;
-    end
-
+    integer i;
     initial begin
         $dumpfile("test.vcd");
         $dumpvars(0,test);
-
-        wait(count == MAX_LEN);
+        for (i = 0 ; i < BINS ; i = i + 1) begin
+            $dumpvars(1, top0.bins[i]);
+        end
+        
+        # 20
+        run = 1;
+        # 20000
 
         $finish;
     end

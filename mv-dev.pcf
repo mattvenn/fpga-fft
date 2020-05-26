@@ -2,7 +2,7 @@ set_io -nowarn sw1      37
 set_io -nowarn sw2      38
 #set_io -nowarn led1     39
 #set_io -nowarn led2     41
-set_io -nowarn clk      49
+set_io -nowarn ext_clk      49
 
 set_io -nowarn LED[0]     39
 set_io -nowarn LED[1]     41
@@ -20,21 +20,20 @@ set_io -nowarn pmod6_1  85
 set_io -nowarn gbin3    93
 
 # extra buttons and leds on pmod5
-set_io -nowarn pmod_but1 98
-set_io -nowarn pmod_but2 97
-set_io -nowarn pmod_but3 96
+#set_io -nowarn pmod_but1 98
+#set_io -nowarn pmod_but2 97
+#set_io -nowarn pmod_but3 96
 
 #set_io -nowarn LED[4] 101
 #set_io -nowarn LED[3] 105
-set_io -nowarn LED[2] 102 # was 104
+#set_io -nowarn LED[2] 102 # was 104
 #set_io -nowarn LED[1] 102
 #set_io -nowarn LED[0] 99
 
 # adc on pmod 5
-set_io -nowarn adc_clk[0] 98
-set_io -nowarn adc_sd[0] 101
-set_io -nowarn adc_cs[0] 104
-set_io -nowarn chan_enable_out[0] 96   # not used with this hw setup
+set_io -nowarn adc_clk 98
+set_io -nowarn adc_sd 101
+set_io -nowarn adc_cs 104
 
 set_io -nowarn pmod5_10 96
 set_io -nowarn pmod5_4  97
@@ -85,6 +84,15 @@ set_io -nowarn pmod2_2  142
 set_io -nowarn pmod2_7  143
 set_io -nowarn pmod2_1  144
 
+set_io -nowarn leds[0]  144
+set_io -nowarn leds[1]  142
+set_io -nowarn leds[2]  139
+set_io -nowarn leds[3]  137
+set_io -nowarn leds[4]  143
+set_io -nowarn leds[5]  141
+set_io -nowarn leds[6]  138
+set_io -nowarn leds[7]  136
+
 # pmod r2r DAC on pmod 4
 set_io -nowarn pulse_dac[0]  1
 set_io -nowarn pulse_dac[1]  2
@@ -96,7 +104,7 @@ set_io -nowarn pulse_dac[6]  9
 set_io -nowarn pulse_dac[7]  10
 
 # some raspi wires soldered onto pmod3
-set_io -nowarn reset 42 # pin 36 on pi
+set_io -nowarn reset_async 42 # pin 36 on pi
 set_io -nowarn i2c_sda 25 # pin 40 on pi - TODO
 set_io -nowarn i2c_scl 28 # pin 38 on pi - TODO
 
