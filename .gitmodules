@@ -1,0 +1,3 @@
+[submodule "dblclockfft"]
+	path = dblclockfft
+	url = https://github.com/ZipCPU/dblclockfft

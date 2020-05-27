@@ -15,13 +15,18 @@ FOMU_FLASH = ~/fomu-flash/fomu-flash
 SEED = 8
 
 PULSE_TOOL=~/work/kneesonic/tools/gen_pulse.py
-SRC=bimpy.v bitreverse.v butterfly.v convround.v fftmain.v fftstage.v hwbfly.v laststage.v longbimpy.v qtrstage.v shiftaddmpy.v top.v adc.v pwm.v
+SRC=bimpy.v bitreverse.v butterfly.v convround.v fftmain.v fftstage.v hwbfly.v laststage.v longbimpy.v qtrstage.v shiftaddmpy.v top.v adc.v pwm.v bram.v
 
-all:  $(PROJ).bin
+all: gamma.hex $(PROJ).bin
+
+gamma.hex:
+	python3 ./gamma.py 8
 
 testtone.hex:
-	$(PULSE_TOOL) --wave sweep --amp 600 --amp2 600 --freq 62500 --freq2 250000 --sample-rate 2000000 --plot --file testtone.hex --length 2000
-#	$(PULSE_TOOL) --wave sine --amp 600  --freq 4000000  --sample-rate 32000000 --plot --file testtone.hex --length 2000
+#	$(PULSE_TOOL) --wave sweep --amp 600 --amp2 600 --freq 62500 --freq2 125000 --sample-rate 2000000 --plot --file testtone.hex --length 2000
+#	$(PULSE_TOOL) --wave sine --amp 600  --freq 62500   --sample-rate 2000000 --plot --file testtone.hex --length 2000
+	$(PULSE_TOOL) --wave sine --amp 600  --freq 93750   --sample-rate 2000000 --plot --file testtone.hex --length 2000
+#	$(PULSE_TOOL) --wave sine --amp 600  --freq 125000  --sample-rate 2000000 --plot --file testtone.hex --length 2000
 
 debug: testtone.hex
 	iverilog -DDEBUG -o test test_tb.v adc_model.v $(SRC)
@@ -45,3 +50,5 @@ prog-fpga: $(BUILD_DIR)/$(PROJ).bin
 prog-flash: $(BUILD_DIR)/$(PROJ).bin
 	scp $< $(PI_ADDR):/tmp/$(PROJ).bin
 	ssh $(PI_ADDR) "sudo $(FOMU_FLASH) -w /tmp/$(PROJ).bin; sudo $(FOMU_FLASH) -r"
+
+.phony: testtone.hex

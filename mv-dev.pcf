@@ -85,12 +85,12 @@ set_io -nowarn pmod2_7  143
 set_io -nowarn pmod2_1  144
 
 set_io -nowarn leds[0]  144
-set_io -nowarn leds[1]  142
-set_io -nowarn leds[2]  139
-set_io -nowarn leds[3]  137
-set_io -nowarn leds[4]  143
-set_io -nowarn leds[5]  141
-set_io -nowarn leds[6]  138
+set_io -nowarn leds[1]  143
+set_io -nowarn leds[2]  142
+set_io -nowarn leds[3]  141
+set_io -nowarn leds[4]  139
+set_io -nowarn leds[5]  138
+set_io -nowarn leds[6]  137
 set_io -nowarn leds[7]  136
 
 # pmod r2r DAC on pmod 4

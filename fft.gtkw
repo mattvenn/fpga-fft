@@ -1,22 +1,22 @@
 [*]
 [*] GTKWave Analyzer v3.3.105 (w)1999-2020 BSI
-[*] Tue May 26 16:58:46 2020
+[*] Wed May 27 12:48:26 2020
 [*]
 [dumpfile] "/home/matt/work/fpga/dblclockfft/sw/fft-core/test.vcd"
-[dumpfile_mtime] "Tue May 26 16:58:33 2020"
-[dumpfile_size] 7847946
+[dumpfile_mtime] "Wed May 27 12:46:33 2020"
+[dumpfile_size] 7647032
 [savefile] "/home/matt/work/fpga/dblclockfft/sw/fft-core/fft.gtkw"
 [timestart] 0
-[size] 2210 1111
+[size] 2210 1288
 [pos] -1 -1
-*-12.000000 18180 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-12.000000 9981 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] test.
 [treeopen] test.top0.
 [treeopen] test.top0.genblk1[0].
 [sst_width] 272
 [signals_width] 517
 [sst_expanded] 1
-[sst_vpaned_height] 325
+[sst_vpaned_height] 385
 @28
 test.clk
 test.adc_clk
@@ -25,7 +25,7 @@ test.adc_sd
 test.done
 @200
 -
-@29
+@28
 test.top0.reset
 @20000
 -
@@ -38,13 +38,13 @@ test.top0.fft_0.o_sync
 test.top0.abs[25:0]
 @20000
 -
-@22
+@24
 test.top0.bin[7:0]
-@8022
+@25
 test.top0.\bins[0][7:0]
 test.top0.\bins[1][7:0]
 test.top0.\bins[2][7:0]
-@22
+@24
 test.top0.\bins[3][7:0]
 test.top0.\bins[4][7:0]
 test.top0.\bins[5][7:0]
