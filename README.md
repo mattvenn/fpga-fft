@@ -7,11 +7,17 @@ This demo uses a 32 bin 12 bit core generated with this command:
 
     ./fftgen -f 32 -n 12 -m 12 -k 16
 
-# setup
+Runs at 32MHz, with -k 16 fft only runs once per 16 cycles (to reduce number of 
+multipliers). So throughput is 2MHz.
+
+Only the first 8 bins are displayed on the LEDs.
+
+# Build
+
+Dev board targetted is [here](https://github.com/mattvenn/first-fpga-pcb)
 
 * run make debug to see trace of a generated sine
 * run make prog-fpga to build a bin and copy to dev board plugged to raspi
-
 
 # Resource usage
 
