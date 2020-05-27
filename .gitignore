@@ -1,4 +1,6 @@
 yosys.log
 nextpnr.log
+fft-core
 *bin
 *vcd
+*hex

@@ -1,4 +1,23 @@
-./fftgen -f 64 -n 12 -m 12
+# Demo of Dan's FFT Core
+
+https://zipcpu.com/dsp/2018/10/02/fft.html
+https://github.com/ZipCPU/dblclockfft
+
+This demo uses a 32 bin 12 bit core generated with this command:
+
+    ./fftgen -f 32 -n 12 -m 12 -k 16
+
+# setup
+
+* run make debug to see trace of a generated sine
+* run make prog-fpga to build a bin and copy to dev board plugged to raspi
+
+
+# Resource usage
+
+## HX8k
+
+### ./fftgen -f 64 -n 12 -m 12
 
 === top ===
 
@@ -19,9 +38,10 @@
      SB_LUT4                      9285
      SB_RAM40_4K                    28
 
+### ./fftgen -f 64 -n 12 -m 12 -k 16
+
 -k #    Sets # clocks per sample, used to minimize multiplies.  Also
         sets one sample in per i_ce clock (opt -1)
-./fftgen -f 64 -n 12 -m 12 -k 16
 
 97% fpga usage on 8k
 
@@ -45,7 +65,7 @@
      SB_RAM40_4K                    28
 
 
-./fftgen -f 32 -n 12 -m 12 -k 16
+### ./fftgen -f 32 -n 12 -m 12 -k 16
 
 Info: Device utilisation:
 Info:            ICESTORM_LC:  6053/ 7680    78%
@@ -74,11 +94,9 @@ Info:            SB_WARMBOOT:     0/    1     0%
      SB_LUT4                      3742
      SB_RAM40_4K                    20
 
+### ./fftgen -f 32 -n 12 -m 12 -k 16 -p 6
 
-ecp5 25k is $11 has 28 mulitplies. each cahnnel gets 7. 1 for hitproc leaves 6 for fft
-ecp5 45k is $18 has 72 multiplies. each channel gets 18. 1 for hitproc leaves 17 for fft
-
-./fftgen -f 32 -n 12 -m 12 -k 16 -p 6
+using hardware dsps on up5k
 
 Info:            ICESTORM_LC:  3092/ 5280    58%
 Info:           ICESTORM_RAM:    14/   30    46%
@@ -96,7 +114,9 @@ Info:            SB_LEDDA_IP:     0/    1     0%
 Info:            SB_RGBA_DRV:     0/    1     0%
 Info:         ICESTORM_SPRAM:     0/    4     0%
 
-./fftgen -f 64 -n 12 -m 12 -k 16 -p 6
+### ./fftgen -f 64 -n 12 -m 12 -k 16 -p 6
+
+using hardware dsps on up5k
 
 Info:            ICESTORM_LC:  3809/ 5280    72%
 Info:           ICESTORM_RAM:    20/   30    66%
@@ -114,8 +134,9 @@ Info:            SB_LEDDA_IP:     0/    1     0%
 Info:            SB_RGBA_DRV:     0/    1     0%
 Info:         ICESTORM_SPRAM:     0/    4     0%
 
-for now working with
-./fftgen -f 32 -n 12 -m 12 -k 16
+### ./fftgen -f 32 -n 12 -m 12 -k 16
+
+for now working with this one
 
 Info: Device utilisation:
 Info:            ICESTORM_LC:  6762/ 7680    88%
