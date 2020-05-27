@@ -33,9 +33,7 @@ testtone.hex:
 
 # link from Dan's core
 fft-core:
-	cd dblclockfft
-	make
-	cd ..
+	make -C dblclockfft
 	./dblclockfft/sw/fftgen -f 32 -n 12 -m 12 -k 16 -d fft-core
 	ln -sf fft-core/cmem_8.hex .
 	ln -sf fft-core/cmem_16.hex .
