@@ -66,7 +66,7 @@ module top #(
     wire signed [WIDTH-1:0] output_real, output_imag;
     
     // energy in the bin band
-    wire [WIDTH*2+1:0] abs = (output_real * output_real) + (output_imag * output_imag);
+    reg [WIDTH*2+1:0] abs;
 
     reg [7:0] bins [BINS-1:0];
     wire [7:0] corrected_pwm_level [7:0];
@@ -75,13 +75,16 @@ module top #(
 
     // update first BINS bins, syncing off the fft sync output
     // is it ok to clock off adc_ready?
-    always @(posedge adc_ready) begin
-        if(sync)
-            bin <= 0;
-        else
-            bin <= bin + 1;
-        if(bin < BINS)
-            bins[bin] <= abs >> 6;
+    always @(posedge clk_32m) begin
+        if(adc_ready) begin
+            abs <= (output_real * output_real) + (output_imag * output_imag) >> 6;
+            if(sync)
+                bin <= 0;
+            if(bin < BINS) begin
+                bin <= bin + 1;
+                bins[bin] <= abs < 255 ? abs : 255; // limit to 255
+            end
+        end
     end
 
     // Dan's fft core
