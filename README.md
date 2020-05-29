@@ -152,3 +152,13 @@ for now working with this one
     Info:           ICESTORM_PLL:     1/    2    50%
     Info:            SB_WARMBOOT:     0/    1     0%
 
+###	fftgen -f 8 -n 12 -m 12 -k 3 -d fft-core
+
+Info: Device utilisation:
+Info: 	         ICESTORM_LC:  3923/ 7680    51%
+Info: 	        ICESTORM_RAM:    12/   32    37%
+Info: 	               SB_IO:    13/  256     5%
+Info: 	               SB_GB:     8/    8   100%
+Info: 	        ICESTORM_PLL:     1/    2    50%
+Info: 	         SB_WARMBOOT:     0/    1     0%
+

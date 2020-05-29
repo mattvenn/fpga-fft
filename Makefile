@@ -15,9 +15,9 @@ FOMU_FLASH = ~/fomu-flash/fomu-flash
 SEED = 8
 
 PULSE_TOOL=~/work/kneesonic/tools/gen_pulse.py
-FFT_CORE = bimpy.v bitreverse.v butterfly.v convround.v fftmain.v fftstage.v hwbfly.v laststage.v longbimpy.v qtrstage.v shiftaddmpy.v
+FFT_CORE = bimpy.v bitreverse.v butterfly.v convround.v fftmain.v fftstage.v hwbfly.v laststage.v longbimpy.v qtrstage.v shiftaddmpy.v 
 FFT_SRC = $(addprefix fft-core/, $(FFT_CORE))
-LOCAL_SRC = top.v adc.v pwm.v bram.v
+LOCAL_SRC = top.v adc.v pwm.v bram.v decimator.v
 SRC = $(FFT_SRC) $(LOCAL_SRC)
 
 all: fft-core gamma.hex $(PROJ).bin
@@ -27,14 +27,14 @@ gamma.hex:
 
 testtone.hex:
 #	$(PULSE_TOOL) --wave sweep --amp 600 --amp2 600 --freq 62500 --freq2 125000 --sample-rate 2000000 --plot --file testtone.hex --length 2000
-#	$(PULSE_TOOL) --wave sine --amp 600  --freq 62500   --sample-rate 2000000 --plot --file testtone.hex --length 2000
-	$(PULSE_TOOL) --wave sine --amp 600  --freq 93750   --sample-rate 2000000 --plot --file testtone.hex --length 2000
+	$(PULSE_TOOL) --wave sine --amp 600  --freq 31250   --sample-rate 2000000  --file testtone.hex --length 2000
+#	$(PULSE_TOOL) --wave sine --amp 600  --freq 93750   --sample-rate 2000000 --plot --file testtone.hex --length 2000
 #	$(PULSE_TOOL) --wave sine --amp 600  --freq 125000  --sample-rate 2000000 --plot --file testtone.hex --length 2000
 
 # link from Dan's core
 fft-core:
 	make -C dblclockfft
-	./dblclockfft/sw/fftgen -f 32 -n 12 -m 12 -k 16 -d fft-core
+	./dblclockfft/sw/fftgen -f 8 -n 12 -m 12 -k 3 -d fft-core
 	ln -sf fft-core/cmem_8.hex .
 	ln -sf fft-core/cmem_16.hex .
 	ln -sf fft-core/cmem_32.hex .

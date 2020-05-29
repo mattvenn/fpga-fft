@@ -66,7 +66,7 @@ module top #(
     wire signed [WIDTH-1:0] output_real, output_imag;
     
     // energy in the bin band
-    wire [WIDTH*2+1:0] abs = (output_real * output_real) + (output_imag * output_imag);
+    reg [WIDTH*2+1:0] abs;
 
     reg [7:0] bins [BINS-1:0];
     wire [7:0] corrected_pwm_level [7:0];
@@ -74,20 +74,26 @@ module top #(
     reg [7:0] bin = 0;
 
     // update first BINS bins, syncing off the fft sync output
-    // is it ok to clock off adc_ready?
+    localparam BIN_DIV = 7;
     always @(posedge clk_32m) begin
-        if(adc_ready) begin
+        if(fft_ce) begin
+            abs <= (output_real * output_real) + (output_imag * output_imag);
             if(sync) begin
                 bin <= 0;
-            end else if(bin < BINS) begin
+            end else begin
                 bin <= bin + 1;
-                bins[bin] <= (abs >> 6) < 255 ? (abs >> 6) : 255; // scale & limit to 255
+            end
+            if(bin < BINS) begin
+                bins[bin] <= (abs >> BIN_DIV) < 255 ? (abs >> BIN_DIV) : 255; // scale & limit to 255
             end
         end
     end
 
     // Dan's fft core
-    fftmain fft_0(.i_clk(clk_32m), .i_reset(reset), .i_ce(adc_ready), .i_sample({adc_data, sample_imag}), .o_result({output_real, output_imag}), .o_sync(sync));
+    wire fft_ce;
+    wire [WIDTH-1:0] decimated_data;
+    decimator #(.WIDTH(WIDTH)) decimator_0(.clk(clk_32m), .ce(adc_ready), .data_in(adc_data), .data_out(decimated_data), .new_sample(fft_ce));
+    fftmain fft_0(.i_clk(clk_32m), .i_reset(reset), .i_ce(fft_ce), .i_sample({decimated_data, sample_imag}), .o_result({output_real, output_imag}), .o_sync(sync));
     
     // pwm and gamma correction for each LED
     generate
